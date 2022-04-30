@@ -1,5 +1,5 @@
 #include <iostream>
-
+#include <vector>
 using namespace std;
 
 class LinkedList
@@ -19,6 +19,7 @@ public:
     void insertNodeMiddle(int);
     void insertNodeEnd(int);
     void deleteNode(int);
+    void append(LinkedList);
 };
 
 void LinkedList::printNode() const
@@ -51,17 +52,18 @@ void LinkedList::insertNodeBegin(int val)
     }
 }
 
-void LinkedList::insertNodeMiddle(int val) {
-    //1. Find the length of the linked list
-    //2. Divide the length by two, save it to var
-    //3. Re-iterate the list again until we hit the nth node that is one less than var
-    //4. Insert the new node next to the nth node one less than var
+void LinkedList::insertNodeMiddle(int val)
+{
+    // 1. Find the length of the linked list
+    // 2. Divide the length by two, save it to var
+    // 3. Re-iterate the list again until we hit the nth node that is one less than var
+    // 4. Insert the new node next to the nth node one less than var
 
-    //Edge cases:
-    // How does it handle a list w/ a single node
-    Node* iter = head;
+    // Edge cases:
+    //  How does it handle a list w/ a single node? just add it to the end
+    Node *iter = head;
     int listLength = 0;
-    while (iter != nullptr) 
+    while (iter != nullptr)
     {
         listLength++;
         iter = iter->next;
@@ -138,27 +140,30 @@ void LinkedList::deleteNode(int val)
     }
 }
 
+void LinkedList::append(LinkedList l2)
+{
+    Node *iter = this->head;
+    while (iter->next != nullptr)
+    {
+        iter = iter->next;
+    }
+    iter->next = l2.head;
+}
+
+/*
+    LinkedList sort(LinkedList list) {
+    LinkedList::Node *ptr1 = list.getHead();
+    LinkedList::Node *ptr2 = list.getHead();
+    LinkedList::Node *divider = list.getHead();
+    //how to sort a linked list? (medium question)
+    //1. iterative approach
+    //2. recursive approach
+
+}
+*/
+
 int main()
 {
-    LinkedList list;
-
-    list.insertNodeEnd(1);
-    list.printNode();
-
-    list.insertNodeMiddle(2);
-    list.printNode();
-
-    list.insertNodeEnd(4);
-    list.printNode();
-
-    list.insertNodeEnd(6);
-    list.printNode();
-
-    list.insertNodeEnd(7);
-    list.printNode();
-
-    list.insertNodeMiddle(8);
-    list.printNode();
 
     return 0;
 }
